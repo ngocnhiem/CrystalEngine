@@ -171,8 +171,8 @@ namespace CE
 			sunLight = sunActor->GetDirectionalLightComponent();
 
 			sunLight->SetLocalPosition(Vec3(0, 0, 0));
-			sunLight->SetLocalEulerAngles(Vec3(70, 0, 0));
-			sunLight->SetIntensity(20.0f);
+			sunLight->SetLocalEulerAngles(Vec3(70, 10, 0));
+			sunLight->SetIntensity(50.0f);
 			sunLight->SetLightColor(Colors::White);
 		}
     }
