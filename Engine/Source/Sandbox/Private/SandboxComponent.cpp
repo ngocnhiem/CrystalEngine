@@ -184,8 +184,6 @@ namespace CE
 
 		elapsedTime += delta;
 
-		//cameraComponent->SetLocalEulerAngles(Vec3(0, 1, 0) * elapsedTime * 15);
-
 		float forwardMotor = 0;
 		float rightwardMotor = 0;
 		float upwardMotor = 0;

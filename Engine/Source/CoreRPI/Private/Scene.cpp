@@ -350,7 +350,7 @@ namespace CE::RPI
 					const auto& inputOutputBindings = pass->GetInputOutputBindings();
 					const auto& outputBindings = pass->GetOutputBindings();
 
-					DrawListTag drawListTag = pass->GetDrawListTag();
+					RHI::DrawListTag drawListTag = pass->GetDrawListTag();
 					SceneViewTag viewTag = pass->GetViewTag();
 					if (!drawListTag.IsValid())
 						return;
@@ -382,8 +382,8 @@ namespace CE::RPI
 							Ptr<PassAttachment> attachment = binding.GetOriginalAttachment();
 							if (attachment == nullptr)
 								return;
-							if (attachment->attachmentDescriptor.type == AttachmentType::Image &&
-								(binding.attachmentUsage == ScopeAttachmentUsage::Color || binding.attachmentUsage == ScopeAttachmentUsage::DepthStencil))
+							if (attachment->attachmentDescriptor.type == RHI::AttachmentType::Image &&
+								(binding.attachmentUsage == RHI::ScopeAttachmentUsage::Color || binding.attachmentUsage == RHI::ScopeAttachmentUsage::DepthStencil))
 							{
 								const RPI::ImageAttachmentDescriptor& attachmentDesc = attachment->attachmentDescriptor.imageDesc;
 
