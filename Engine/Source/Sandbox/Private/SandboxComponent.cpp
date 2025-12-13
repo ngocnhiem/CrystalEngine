@@ -174,6 +174,7 @@ namespace CE
 			sunLight->SetLocalEulerAngles(Vec3(70, 10, 0));
 			sunLight->SetIntensity(50.0f);
 			sunLight->SetLightColor(Colors::White);
+			sunLight->SetShadowDistance(25);
 		}
     }
 
@@ -183,7 +184,53 @@ namespace CE
 
 		elapsedTime += delta;
 
-		cameraComponent->SetLocalEulerAngles(Vec3(0, 1, 0) * elapsedTime * 15);
+		//cameraComponent->SetLocalEulerAngles(Vec3(0, 1, 0) * elapsedTime * 15);
+
+		float forwardMotor = 0;
+		float rightwardMotor = 0;
+		float upwardMotor = 0;
+		float eulerMotor = 0;
+
+		if (InputManager::IsKeyHeld(KeyCode::W))
+		{
+			forwardMotor += 1;
+		}
+		if (InputManager::IsKeyHeld(KeyCode::S))
+		{
+			forwardMotor -= 1;
+		}
+		if (InputManager::IsKeyHeld(KeyCode::A))
+		{
+			rightwardMotor -= 1;
+		}
+		if (InputManager::IsKeyHeld(KeyCode::D))
+		{
+			rightwardMotor += 1;
+		}
+		if (InputManager::IsKeyHeld(KeyCode::Q))
+		{
+			if (InputManager::IsKeyHeld(KeyCode::LShift))
+				eulerMotor -= 1;
+			else
+				upwardMotor += 1;
+		}
+		if (InputManager::IsKeyHeld(KeyCode::E))
+		{
+			if (InputManager::IsKeyHeld(KeyCode::LShift))
+				eulerMotor += 1;
+			else
+				upwardMotor -= 1;
+		}
+
+		Vec3 pos = cameraComponent->GetPosition();
+		pos += cameraComponent->GetForwardVector() * forwardMotor * cameraMoveSpeed * delta;
+		pos += cameraComponent->GetRightwardVector() * rightwardMotor * cameraMoveSpeed * delta;
+		pos += cameraComponent->GetUpwardVector() * upwardMotor * cameraMoveSpeed * delta;
+		cameraComponent->SetPosition(pos);
+
+		Vec3 euler = cameraComponent->GetLocalEulerAngles();
+		euler.y += eulerMotor * cameraRotateSpeed * delta;
+		cameraComponent->SetLocalEulerAngles(euler);
 	}
 
 } // namespace CE
