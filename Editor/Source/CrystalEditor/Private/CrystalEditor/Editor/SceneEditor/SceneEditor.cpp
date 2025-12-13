@@ -321,7 +321,7 @@ namespace CE::Editor
                 skyboxMaterial->SetShader(skyboxShader.Get());
                 skyboxMeshComponent->SetMaterial(skyboxMaterial, 0, 0);
 
-                skyboxMaterial->SetProperty("_CubeMap", skybox.Get());
+                skyboxMaterial->SetProperty("_CubeMap", MaterialTextureValue(skybox.Get()));
                 skyboxMaterial->ApplyProperties();
             }
 

@@ -28,6 +28,8 @@ namespace CE
 
 		virtual u32 GetLodSubMeshCount(u32 lodIndex) { return 1; }
 
+		virtual int GetLodSubMeshMaterialIndex(u32 lodIndex, u32 subMeshIndex) { return 0; }
+
 		RPI::CustomMaterialMap GetRpiMaterialMap();
 
 		Ref<MaterialInterface> GetMaterial(u32 subMeshIndex = 0);

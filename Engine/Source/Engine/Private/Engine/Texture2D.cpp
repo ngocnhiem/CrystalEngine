@@ -26,7 +26,7 @@ namespace CE
 			desc.texture.bindFlags = RHI::TextureBindFlags::ShaderRead;
 			desc.texture.mipLevels = mipLevels;
 			desc.texture.sampleCount = 1;
-			desc.texture.dimension = Dimension::Dim2D;
+			desc.texture.dimension = RHI::Dimension::Dim2D;
 			
 			if (TextureSourceCompressionFormatIsBCn(sourceCompressionFormat))
 			{
@@ -88,7 +88,7 @@ namespace CE
 		desc.texture.bindFlags = RHI::TextureBindFlags::ShaderRead;
 		desc.texture.mipLevels = mipLevels;
 		desc.texture.sampleCount = 1;
-		desc.texture.dimension = Dimension::Dim2D;
+		desc.texture.dimension = RHI::Dimension::Dim2D;
 
 		if (TextureSourceCompressionFormatIsBCn(sourceCompressionFormat))
 		{

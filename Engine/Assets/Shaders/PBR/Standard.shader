@@ -44,6 +44,7 @@ Shader "PBR/Standard"
             }
             ZWrite On
             ZTest LEqual
+            Cull Off
 
             HLSLPROGRAM
 
@@ -116,6 +117,8 @@ Shader "PBR/Standard"
             Texture2D<float> _RoughnessTex : SRG_PerMaterial(t2);
             Texture2D<float4> _NormalTex : SRG_PerMaterial(t3);
             Texture2D<float> _MetallicTex : SRG_PerMaterial(t4);
+
+            SamplerState _AlbedoTexSampler : SRG_PerMaterial(t5);
 
             struct TileFrustum 
             { 
@@ -202,16 +205,16 @@ Shader "PBR/Standard"
                 float3 tangent = normalize(input.tangent);
                 float3 bitangent = normalize(input.bitangent);
 
-                float4 normalMapSample = _NormalTex.Sample(_DefaultSampler, input.uv);
+                float4 normalMapSample = _NormalTex.Sample(_AlbedoTexSampler, input.uv);
                 float3 tangentSpaceNormal = normalize(normalMapSample.xyz * 2.0 - 1.0);
 
                 float3x3 tangentToWorld = float3x3(tangent, bitangent, vertNormal);
                 float3 normal = normalize(mul(tangentSpaceNormal, tangentToWorld));
 
                 MaterialInput material;
-                material.albedo = GammaToLinear(_Albedo.rgb * _AlbedoTex.Sample(_DefaultSampler, input.uv).rgb);
-                material.metallic = _Metallic * _MetallicTex.Sample(_DefaultSampler, input.uv);
-                material.roughness = _Roughness * _RoughnessTex.Sample(_DefaultSampler, input.uv);
+                material.albedo = GammaToLinear(_Albedo.rgb * _AlbedoTex.Sample(_AlbedoTexSampler, input.uv).rgb);
+                material.metallic = _Metallic * _MetallicTex.Sample(_AlbedoTexSampler, input.uv);
+                material.roughness = _Roughness * _RoughnessTex.Sample(_AlbedoTexSampler, input.uv);
                 material.ambient = _AmbientOcclusion;
 
                 float3 Lo = float3(0, 0, 0);
