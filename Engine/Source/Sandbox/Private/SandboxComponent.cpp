@@ -136,21 +136,6 @@ namespace CE
 			meshComponent->SetMaterial(aluminiumMaterial, 0, 0);
 		}
 
-		// - Ground -
-
-		if (false)
-	    {
-		    StaticMeshActor* groundMesh = CreateObject<StaticMeshActor>(scene, "GroundPlane");
-        	scene->AddActor(groundMesh);
-	        {
-		    	StaticMeshComponent* meshComponent = groundMesh->GetMeshComponent();
-		    	meshComponent->SetStaticMesh(cubeMesh);
-		    	meshComponent->SetLocalPosition(Vec3(0, -0.75f, 5));
-		    	meshComponent->SetLocalScale(Vec3(5, 0.05f, 5));
-		    	meshComponent->SetMaterial(woodMaterial, 0, 0);
-	        }
-	    }
-
 		// - Sponza -
 		StaticMeshActor* sponzaActor = CreateObject<StaticMeshActor>(scene, "SponzaMesh");
 		scene->AddActor(sponzaActor);
